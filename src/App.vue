@@ -1,17 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="dice logo" src="./assets/dice.jpg">
+  <gamble-game msg="Welcome to the Dice Gamble Game"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import GambleGame from "./components/GambleGame.vue"
+import { mapGetters } from 'vuex';
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    GambleGame,
+  },
+  computed: {
+    ...mapGetters(['contract'])
+  },
+  async created() {
+    await this.$store.dispatch('initNear');
+  },
+};
 </script>
 
 <style>
