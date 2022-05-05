@@ -1,5 +1,5 @@
 <template>
-  <img alt="dice logo" src="./assets/dice.jpg">
+  <img width="400" alt="dice logo" src="./assets/dice.jpg">
   <gamble-game msg="Welcome to the Dice Gamble Game"/>
 </template>
 

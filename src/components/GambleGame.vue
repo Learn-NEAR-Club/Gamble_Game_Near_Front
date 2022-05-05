@@ -1,10 +1,12 @@
 <template>
   <main>
-    <header style="display: flex; align-items: center; justify-content: space-between;">
-      <h1 title="log in and gamble to get 6X the prize">Dice Gamble game</h1>
-      <button @click="currentUser ? signOut() : signIn()">
-        {{ currentUser ? 'Log Out' : 'Log In' }}
-      </button>
+    <header  style="align-items: center; justify-content: space-between;">
+      <div align="center">
+        <h1 align="center" title="log in and gamble to get 6X the prize">Dice Gamble game</h1>
+        <button align="center" title="This enables your link to near testnet" @click="currentUser ? signOut() : signIn()">
+          {{ currentUser ? 'Log Out' : 'Log In' }}
+        </button>
+      </div>
     </header>
     <template v-if="currentUser">
       <h3>Hi, {{currentUser.accountId}}, your balance is {{currentUser.balanceInNear}} Near</h3>
@@ -25,7 +27,7 @@
     </template>
     <template v-else>
       <p>
-        Kindly sign in to play the game.
+        Kindly sign in to play the game. You may get 6X the price when your rolling ends up with a 6.
       </p>
     </template>
   </main>
