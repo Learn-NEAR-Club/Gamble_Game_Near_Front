@@ -11,8 +11,9 @@
     <template v-if="currentUser">
       <h3>Hi, {{currentUser.accountId}}, your balance is {{currentUser.balanceInNear}} Near</h3>
       <p class="highlight">
-        <label for="gamble">Maximum : {{gambleLimit}}</label>
+        <label for="gamble">Maximum : {{gambleLimit}} Near </label>
         <button @click="refresh()"> Refresh</button>
+        
       </p>
       <p class="highlight">
         <label for="gamble">Gamble:</label>
@@ -48,10 +49,28 @@ export default {
       gas: Big(3).times(10 ** 13).toFixed(),
     };
   },
-  async mounted() {
-    // Once the user is available, set max donation.
+
+  async created(){
+    console.log("created")
+    console.log(sessionStorage.getItem('gambleLimit'))
+    if (sessionStorage.getItem('gambleLimit')) {
+      this.gambleLimit = sessionStorage.getItem('gambleLimit')
+    }
   },
+
+  async mounted() {
+    var that  = this
+      console.log("Mount")
+      setInterval(
+        () => {
+          console.log("refresh")
+          that.refresh()
+          },3000
+      )
+  },
+  
   methods: {
+    // Sign in
     signIn() {
       this.wallet.requestSignIn(
         this.nearConfig.contractName,
@@ -71,7 +90,6 @@ export default {
         );
       }catch (e) {
         console.log(e);
-        alert('Something went wrong! Check the console.');
       }
     },
     async sponsorus(){
@@ -89,6 +107,7 @@ export default {
     async refresh(){
       this.gambleLimit = await this.contract.get_maximum_gamble_price()
       this.gambleLimit = this.gambleLimit / (10 ** 24)
+      sessionStorage.setItem('gambleLimit',this.gambleLimit)
     }
   }
 };

@@ -45,7 +45,7 @@ const store = createStore({
         currentUser = {
           accountId: wallet.getAccountId(),
           balance: (await wallet.account().state()).amount,
-          balanceInNear : (await wallet.account().state()).amount / (10 ** 24)
+          balanceInNear : (await wallet.account().state()).amount / (10 ** 24),
         }
       }
 
